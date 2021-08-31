@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Exam.Mvc.Web.Models.RateValueModel>
+
+@{
+    ViewData["Title"] = "Rate Values";
+}
+
+<h1>Rates</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaturityYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpperBoundInterestRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncrementalRate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaturityYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpperBoundInterestRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncrementalRate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

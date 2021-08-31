@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Exam.Mvc.Web.Models.CalculatorModel>
+
+<table class="table table-striped" style="align-content:center" id="tableTest">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.PresentValue)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.LowerBoundInterestRate)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.FutureValue)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.IncrementalRate)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.MaturityYear)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.UpperBoundInterestRate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PresentValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LowerBoundInterestRate)%
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FutureValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncrementalRate)%
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaturityYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpperBoundInterestRate)%
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#btnSave").click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Save")',
+                    data: $('#frmCompute').serialize(),
+                    success: function (data) {
+                        console.log(data)
+                    }
+                });
+            });
+        }
+    </script>
+}

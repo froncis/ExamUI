@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Exam.Mvc.Web.Models.CalculatorValueModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PresentValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FutureValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LowerBoundInterestRate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PresentValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FutureValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LowerBoundInterestRate)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

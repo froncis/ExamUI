@@ -1,0 +1,88 @@
+﻿@model Exam.Mvc.Web.Models.CalculatorModel
+
+@{
+    ViewData["Title"] = "Calculator";
+}
+<div class="row">
+    <div class="col-md-3">
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-3">
+        <h4>Calculator</h4>
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-3">
+        <form id="frmCompute" asp-action="Compute">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PresentValue" class="control-label"></label>
+                <input asp-for="PresentValue" class="form-control" />
+                <span asp-validation-for="PresentValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LowerBoundInterestRate" class="control-label"></label>
+                <input asp-for="LowerBoundInterestRate" class="form-control" />
+                <span asp-validation-for="LowerBoundInterestRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaturityYear" class="control-label"></label>
+                <input asp-for="MaturityYear" class="form-control" />
+                <span asp-validation-for="MaturityYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpperBoundInterestRate" class="control-label"></label>
+                <input asp-for="UpperBoundInterestRate" class="form-control" />
+                <span asp-validation-for="UpperBoundInterestRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IncrementalRate" class="control-label"></label>
+                <input asp-for="IncrementalRate" class="form-control" />
+                <span asp-validation-for="IncrementalRate" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-9" id="divCalculatedValues"></div>
+</div>
+<div class="row">
+    <div class="col-md-11">
+        <input type="submit" value="Calculate" class="btn btn-primary" id="btnCalculate" />
+    </div>
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" id="btnSave" />
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        $("#btnCalculate").click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("Compute")',
+                data: $('#frmCompute').serialize(),
+                success: function (data) {
+                    $('#divCalculatedValues').html(data);
+                }
+            });
+        });
+        $("#btnSave").click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("SaveComputed")',
+                data: $('#frmCompute').serialize(),
+                success: function (data) {
+                    console.log(data)
+                }
+            });
+        });
+    })
+    </script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
