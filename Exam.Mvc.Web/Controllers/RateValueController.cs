@@ -1,4 +1,4 @@
-﻿using Exam.Mvc.Web.Common;
+﻿            using Exam.Mvc.Web.Common;
 using Exam.Mvc.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -49,7 +49,7 @@ namespace Exam.Mvc.Web.Controllers
                 Content = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json")
             };
             HttpResponseMessage response = GlobalVariables.WebApiClient.SendAsync(request).Result;
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
